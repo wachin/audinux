@@ -1,4 +1,119 @@
+############################
+# Python general
+############################
+__pycache__/
+*.py[cod]
+*$py.class
 
-# gitignore
-..gitignore.kate-swp
+############################
+# Entornos virtuales
+############################
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+.python-version
 
+############################
+# Pip / build / packaging
+############################
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.whl
+
+############################
+# Setuptools / PyProject
+############################
+.pyproject.toml.user
+setup.cfg
+
+############################
+# PyInstaller
+############################
+*.spec
+
+############################
+# PyQt / Qt
+############################
+*.qmlc
+*.jsc
+*.qm
+.qmake.stash
+moc_*.cpp
+ui_*.py
+
+############################
+# VLC / multimedia temporales
+############################
+*.log
+*.tmp
+*.bak
+
+############################
+# Caché de la aplicación (XDG)
+############################
+.cache/
+__waveform_cache__/
+waveforms_cache/
+
+############################
+# Datos de usuario (NO versionar)
+############################
+markers/
+*.markers.json
+
+############################
+# IDEs y editores
+############################
+# VS Code
+.vscode/
+
+# Qt Creator
+*.user
+*.pro.user
+*.qmlproject.user
+*.pyproject.user
+
+# PyCharm
+.idea/
+
+############################
+# Sistema operativo
+############################
+# Linux
+*~
+.fuse_hidden*
+.directory
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+############################
+# Archivos de prueba locales
+############################
+test_audio/
+samples/
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.m4a
+
+############################
+# Archivos comprimidos
+############################
+*.zip
+*.tar
+*.tar.gz
+*.tar.xz
