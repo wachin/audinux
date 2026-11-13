@@ -1,0 +1,70 @@
+.TH AUDINUX 1 "2026-11-13" "audinux 0.6.1" "User Commands"
+.SH NAME
+audinux \- long-audio player with a multi-line waveform, markers and A\-B loop
+.SH SYNOPSIS
+.B audinux
+.RI [ file ]
+.SH DESCRIPTION
+.B audinux
+is a graphical audio player intended for long recordings: audiobooks,
+sermons, lectures and podcasts lasting from a few minutes to several hours.
+The whole file is drawn as a multi-line waveform that always fits the
+window, so any position can be reached with a single click instead of
+scrolling.
+.PP
+Waveforms are generated in the background while playback starts
+immediately, and are cached on disk so that reopening the same file is
+fast. If
+.B audiowaveform
+is installed it is used for generation; otherwise
+.B ffmpeg
+is used.
+.PP
+Playback is performed by VLC (libVLC) directly from the original file, so
+no re\-encoding takes place and quality is preserved.
+.PP
+Named markers are stored per audio file. Two markers around the current
+position define an A\-B loop.
+.SH OPTIONS
+The program takes no command line options. If
+.I file
+is given, it is opened on startup.
+.SH KEYBOARD SHORTCUTS
+.TP
+.B Space
+Play or pause.
+.TP
+.B S
+Stop playback.
+.TP
+.B M
+Add a marker at the current position.
+.TP
+.B L
+Enable or disable the A\-B loop.
+.TP
+.B Ctrl+O
+Open an audio file.
+.TP
+.B Ctrl+P
+Add audio files to the playlist.
+.SH FILES
+.TP
+.I ~/.config/Audinux/Audinux.conf
+Window layout and last used settings, stored with QSettings.
+.TP
+.I ~/.local/share/audinux/markers/
+Marker lists, one JSON file per audio file.
+.TP
+.I ~/.cache/audinux/
+Cached waveform data.
+.PP
+The directories follow the XDG Base Directory specification
+.RB ( XDG_CONFIG_HOME ,
+.BR XDG_DATA_HOME ,
+.BR XDG_CACHE_HOME ).
+.SH SEE ALSO
+.BR vlc (1),
+.BR ffmpeg (1)
+.SH AUTHOR
+Washington Indacochea Delgado <linuxfrontier@proton.me>

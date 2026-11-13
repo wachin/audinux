@@ -1,0 +1,5 @@
+audinux (0.6.1-1) unstable; urgency=medium
+
+  * Initial Debian packaging.
+
+ -- Washington Indacochea Delgado <linuxfrontier@proton.me>  Fri, 13 Nov 2026 11:40:00 -0500

@@ -1,0 +1,20 @@
+#!/bin/sh
+# Smoke test: the package must import cleanly and ship a usable icon.
+set -e
+
+export QT_QPA_PLATFORM=offscreen
+export XDG_RUNTIME_DIR="$(mktemp -d)"
+trap 'rm -rf "$XDG_RUNTIME_DIR"' EXIT
+
+python3 -c "import audinux, audinux.app, audinux.audio, audinux.waveform"
+
+python3 - << 'PY'
+from PyQt6.QtWidgets import QApplication
+from audinux.app import app_icon
+
+app = QApplication([])
+icon = app_icon()
+assert not icon.isNull(), "no application icon found"
+assert not icon.pixmap(64, 64).isNull(), "application icon does not render"
+print("icon:", icon.availableSizes())
+PY

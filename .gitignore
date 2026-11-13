@@ -20,6 +20,7 @@ env/
 ############################
 build/
 dist/
+.pybuild/
 *.egg-info/
 .eggs/
 pip-wheel-metadata/
@@ -117,3 +118,13 @@ samples/
 *.tar
 *.tar.gz
 *.tar.xz
+
+############################
+# Artefactos de debhelper
+############################
+debian/.debhelper/
+debian/audinux/
+debian/files
+debian/*.substvars
+debian/*.debhelper
+debian/debhelper-build-stamp

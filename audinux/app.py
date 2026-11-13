@@ -26,24 +26,34 @@ CTX = "Audinux"
 
 def app_icon() -> QIcon:
     """Locate the Audinux icon in source, frozen and installed layouts."""
+    # Installed icons are indexed by the icon theme, which also gives us the
+    # full set of PNG sizes instead of a single file.
+    themed = QIcon.fromTheme("audinux")
+    if not themed.isNull():
+        return themed
+
+    repo = Path(__file__).resolve().parent.parent
     roots = []
     frozen = getattr(sys, "_MEIPASS", None)
     if frozen:
         roots.append(Path(frozen) / "packaging")
     # Running from a source checkout: <repo>/packaging
-    roots.append(Path(__file__).resolve().parent.parent / "packaging")
+    roots.append(repo / "packaging")
+    roots.append(repo / "packaging" / "icons" / "hicolor" / "256x256" / "apps")
     # Installed data files (pip / system package)
-    roots.append(Path(sys.prefix) / "share" / "icons" / "hicolor" / "scalable" / "apps")
-    roots.append(Path("/usr/share/icons/hicolor/scalable/apps"))
+    for prefix in (Path(sys.prefix), Path("/usr")):
+        roots.append(prefix / "share" / "icons" / "hicolor" / "256x256" / "apps")
+        roots.append(prefix / "share" / "icons" / "hicolor" / "scalable" / "apps")
 
+    # Prefer PNG: rendering SVG icons needs the Qt SVG image plugin, which is
+    # not pulled in by PyQt6 itself.
     for root in roots:
-        for name in ("audinux.svg", "audinux.png"):
+        for name in ("audinux.png", "audinux.svg"):
             path = root / name
             if path.is_file():
                 return QIcon(str(path))
 
-    # Last resort: whatever icon theme is active.
-    return QIcon.fromTheme("audinux")
+    return QIcon()
 
 
 class AudioPlayer(QMainWindow):
@@ -434,7 +444,7 @@ class AudioPlayer(QMainWindow):
         super().closeEvent(event)
 
 def run():
-    app = QApplication([])
+    app = QApplication(sys.argv)
     # Wayland compositors match the window to its .desktop entry for the taskbar.
     app.setDesktopFileName("audinux")
     app.setWindowIcon(app_icon())
@@ -443,4 +453,14 @@ def run():
     w.setWindowIcon(app.windowIcon())
     w.resize(1100, 720)
     w.show()
+
+    # Files handed over by the desktop entry (Exec=audinux %f) or the shell:
+    # the first one starts playing, the rest fill the playlist.
+    files = [p for p in sys.argv[1:] if os.path.isfile(p)]
+    for extra in files[1:]:
+        w.playlist.add(extra)
+        w.pl_list.addItem(os.path.basename(extra))
+    if files:
+        w.load_track(files[0], add_to_playlist=True)
+
     app.exec()

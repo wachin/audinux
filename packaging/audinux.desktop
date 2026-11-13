@@ -1,10 +1,16 @@
 [Desktop Entry]
 Type=Application
+Version=1.5
 Name=Audinux
-Comment=Long-audio player with multi-line waveform and markers
+GenericName=Audio Player
+GenericName[es]=Reproductor de audio
+Comment=Play long audio files with a multi-line waveform, markers and A-B loop
+Comment[es]=Reproduce audios largos con forma de onda multilínea, marcadores y bucle A-B
 Exec=audinux %f
 Icon=audinux
 Terminal=false
 Categories=AudioVideo;Audio;Player;
+Keywords=audio;player;waveform;audiobook;podcast;lecture;marker;loop;
+Keywords[es]=audio;reproductor;forma de onda;audiolibro;podcast;conferencia;marcador;bucle;
 MimeType=audio/mpeg;audio/x-wav;audio/flac;audio/ogg;audio/mp4;
 StartupNotify=true

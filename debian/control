@@ -1,0 +1,36 @@
+Source: audinux
+Section: sound
+Maintainer: Washington Indacochea Delgado <linuxfrontier@proton.me>
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-python3,
+               pybuild-plugin-pyproject,
+               python3,
+               python3-setuptools
+Standards-Version: 4.7.4.1
+Rules-Requires-Root: no
+Homepage: https://github.com/wachin/audinux
+Vcs-Git: https://github.com/wachin/audinux.git
+Vcs-Browser: https://github.com/wachin/audinux
+
+Package: audinux
+Architecture: all
+Depends: ffmpeg,
+         python3-numpy,
+         python3-pyqt6,
+         python3-vlc,
+         ${misc:Depends},
+         ${python3:Depends}
+Recommends: vlc
+Suggests: audiowaveform
+Description: long-audio player with multi-line waveform and markers
+ Audinux is an audio player built for long recordings, from a few minutes
+ to multi-hour audiobooks, sermons, lectures and podcasts.
+ .
+ It renders the whole file as a multi-line waveform that fits the window,
+ so any position can be reached with a single click, even in files several
+ hours long. Waveforms are generated in the background while playback
+ starts immediately and are cached on disk for faster reopening.
+ .
+ It also provides named markers saved per file, an A-B loop between two
+ markers, a playlist, and adjustable playback speed and volume. Playback
+ is done by VLC from the original file, without re-encoding.

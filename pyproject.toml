@@ -8,7 +8,7 @@ version = "0.6.1"
 description = "Audinux - long-audio player for Linux with multi-line waveform, markers and A↔B loop"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = {text = "GPL-3.0-only"}
 authors = [{name = "Washington Indacochea Delgado"}]
 dependencies = [
   "PyQt6>=6.4",
@@ -30,3 +30,12 @@ include = ["audinux*"]
 "share/applications" = ["packaging/audinux.desktop"]
 "share/icons/hicolor/scalable/apps" = ["packaging/audinux.svg"]
 "share/audinux/i18n" = ["packaging/i18n/README.txt"]
+"share/icons/hicolor/16x16/apps" = ["packaging/icons/hicolor/16x16/apps/audinux.png"]
+"share/icons/hicolor/22x22/apps" = ["packaging/icons/hicolor/22x22/apps/audinux.png"]
+"share/icons/hicolor/24x24/apps" = ["packaging/icons/hicolor/24x24/apps/audinux.png"]
+"share/icons/hicolor/32x32/apps" = ["packaging/icons/hicolor/32x32/apps/audinux.png"]
+"share/icons/hicolor/48x48/apps" = ["packaging/icons/hicolor/48x48/apps/audinux.png"]
+"share/icons/hicolor/64x64/apps" = ["packaging/icons/hicolor/64x64/apps/audinux.png"]
+"share/icons/hicolor/128x128/apps" = ["packaging/icons/hicolor/128x128/apps/audinux.png"]
+"share/icons/hicolor/256x256/apps" = ["packaging/icons/hicolor/256x256/apps/audinux.png"]
+"share/icons/hicolor/512x512/apps" = ["packaging/icons/hicolor/512x512/apps/audinux.png"]

@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME = audinux
+
+%:
+	dh $@ --buildsystem=pybuild
+
+# Upstream has no test suite yet; the installed package is exercised by the
+# autopkgtest in debian/tests instead.
+override_dh_auto_test:

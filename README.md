@@ -163,7 +163,9 @@ This project is structured to install cleanly on Linux, similar to OpenLP:
 - Python package: `audinux/`
 - Desktop file & icon: `packaging/`
 - Translations: `i18n/`
+- Debian packaging: `debian/` (see `DEBIAN.md` for building and uploading)
 
 ## License
 
-See `LICENSE`.
+Audinux is free software, released under the terms of the GNU General Public
+License, version 3. See `LICENSE` for the full text.
