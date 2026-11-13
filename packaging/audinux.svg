@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <rect x="20" y="20" width="216" height="216" rx="32" ry="32" fill="#1f2937"/>
-  <path d="M92 76 L92 180 L172 128 Z" fill="#10b981"/>
-  <path d="M44 160 C64 130 72 138 92 120 C116 98 136 156 160 132 C178 116 196 118 212 104" fill="none" stroke="#60a5fa" stroke-width="10" stroke-linecap="round"/>
+  <rect x="20" y="20" width="216" height="216" rx="34" ry="34" fill="#1e293b"/>
+  <path d="M58 59.0V105.0 M71 67.0V97.0 M84 74.0V90.0 M97 63.0V101.0 M110 57.0V107.0 M123 68.0V96.0 M136 75.0V89.0 M149 69.0V95.0 M162 60.0V104.0 M175 65.0V99.0 M188 72.0V92.0 M201 77.0V87.0" stroke="#38bdf8" stroke-width="7" stroke-linecap="round" opacity="1.0"/>
+  <path d="M58 117.0V139.0 M71 108.0V148.0 M84 102.0V154.0 M97 113.0V143.0 M110 120.0V136.0 M123 116.0V140.0 M136 107.0V149.0 M149 104.0V152.0 M162 114.0V142.0 M175 121.0V135.0 M188 115.0V141.0 M201 109.0V147.0" stroke="#38bdf8" stroke-width="7" stroke-linecap="round" opacity="0.72"/>
+  <path d="M58 157.0V191.0 M71 165.0V183.0 M84 160.0V188.0 M97 151.0V197.0 M110 156.0V192.0 M123 163.0V185.0 M136 168.0V180.0 M149 159.0V189.0 M162 149.0V199.0 M175 154.0V194.0 M188 162.0V186.0 M201 167.0V181.0" stroke="#38bdf8" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+  <rect x="145" y="52" width="4" height="152" rx="2" fill="#fbbf24"/>
+  <polygon points="138,38 156,38 147,52" fill="#fbbf24"/>
 </svg>

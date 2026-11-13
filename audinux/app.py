@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 import os
+import sys
+from pathlib import Path
+
 import numpy as np
 
 from PyQt6.QtCore import Qt, QTimer, QByteArray
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton,
     QLabel, QFileDialog, QSlider, QListWidget, QGroupBox, QLineEdit, QMessageBox,
@@ -18,6 +22,29 @@ from .waveform import WaveformWidget, ms_to_time
 from .i18n import tr, load_translators
 
 CTX = "Audinux"
+
+
+def app_icon() -> QIcon:
+    """Locate the Audinux icon in source, frozen and installed layouts."""
+    roots = []
+    frozen = getattr(sys, "_MEIPASS", None)
+    if frozen:
+        roots.append(Path(frozen) / "packaging")
+    # Running from a source checkout: <repo>/packaging
+    roots.append(Path(__file__).resolve().parent.parent / "packaging")
+    # Installed data files (pip / system package)
+    roots.append(Path(sys.prefix) / "share" / "icons" / "hicolor" / "scalable" / "apps")
+    roots.append(Path("/usr/share/icons/hicolor/scalable/apps"))
+
+    for root in roots:
+        for name in ("audinux.svg", "audinux.png"):
+            path = root / name
+            if path.is_file():
+                return QIcon(str(path))
+
+    # Last resort: whatever icon theme is active.
+    return QIcon.fromTheme("audinux")
+
 
 class AudioPlayer(QMainWindow):
     def __init__(self):
@@ -408,8 +435,12 @@ class AudioPlayer(QMainWindow):
 
 def run():
     app = QApplication([])
+    # Wayland compositors match the window to its .desktop entry for the taskbar.
+    app.setDesktopFileName("audinux")
+    app.setWindowIcon(app_icon())
     _trs = load_translators(app)
     w = AudioPlayer()
+    w.setWindowIcon(app.windowIcon())
     w.resize(1100, 720)
     w.show()
     app.exec()

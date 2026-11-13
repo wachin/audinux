@@ -19,8 +19,12 @@ Recommended system packages:
 
 ```bash
 sudo apt update
-sudo apt install -y python3-pyqt6 python3-pyqt6.qtsvg vlc ffmpeg
+sudo apt install -y python3-pyqt6 python3-pyqt6.qtsvg vlc ffmpeg python3-vlc
 ```
+
+### python3-vlc
+
+The `python3-vlc` package is available in the Debian/Ubuntu repositories and provides the VLC Python bindings. This avoids the need to install `python-vlc` via pip. Install it alongside the other recommended system packages above.
 
 ### Optional (recommended): audiowaveform
 
@@ -35,6 +39,16 @@ From the project folder:
 ```bash
 python3 -m audinux
 ```
+
+### Without pip
+
+If you prefer not to use pip, you can install the required dependencies via the system package manager:
+
+```bash
+sudo apt install -y python3-pyqt6 python3-pyqt6.qtsvg vlc ffmpeg python3-vlc
+```
+
+`numpy` is also available as `python3-numpy`. Note that `pydub` has no Debian/Ubuntu package, so that single dependency still has to come from PyPI if it is not already installed.
 
 ## Development install (Linux editable)
 
@@ -51,10 +65,11 @@ Install Audinux in editable mode **without pulling PyQt6 from PyPI**:
 pip install -e . --no-deps
 ```
 
-Install the remaining pure-Python dependencies:
+Install the remaining dependencies. `numpy` comes from apt; `pydub` is not packaged for Debian/Ubuntu, so it comes from PyPI:
 
 ```bash
-pip install numpy pydub python-vlc
+sudo apt install -y python3-numpy
+pip install pydub
 ```
 
 ---
