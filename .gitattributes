@@ -1,0 +1,3 @@
+# Keep the Debian packaging out of the released tarballs: Debian
+# requires debian/ to live in the source package, not in upstream sources.
+/debian export-ignore
