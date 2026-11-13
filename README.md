@@ -48,7 +48,7 @@ If you prefer not to use pip, you can install the required dependencies via the 
 sudo apt install -y python3-pyqt6 python3-pyqt6.qtsvg vlc ffmpeg python3-vlc
 ```
 
-`numpy` is also available as `python3-numpy`. Note that `pydub` has no Debian/Ubuntu package, so that single dependency still has to come from PyPI if it is not already installed.
+`numpy` is also available as `python3-numpy`, so the command above is all that is needed.
 
 ## Development install (Linux editable)
 
@@ -65,11 +65,10 @@ Install Audinux in editable mode **without pulling PyQt6 from PyPI**:
 pip install -e . --no-deps
 ```
 
-Install the remaining dependencies. `numpy` comes from apt; `pydub` is not packaged for Debian/Ubuntu, so it comes from PyPI:
+Install the remaining dependency from apt:
 
 ```bash
 sudo apt install -y python3-numpy
-pip install pydub
 ```
 
 ---
@@ -94,7 +93,7 @@ Audinux works on Windows 10. Playback uses **VLC** (libVLC), so VLC must be inst
 In PowerShell, inside the project folder:
 
 ```powershell
-pip install PyQt6 numpy pydub python-vlc
+pip install PyQt6 numpy python-vlc
 python -m audinux
 ```
 
@@ -104,7 +103,7 @@ python -m audinux
 python -m venv .venv
 .\.venv\Scriptsctivate
 pip install -U pip
-pip install PyQt6 numpy pydub python-vlc
+pip install PyQt6 numpy python-vlc
 python -m audinux
 ```
 
