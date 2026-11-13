@@ -9,6 +9,7 @@ Everything below was built and checked on Debian 13 (trixie).
 | Requirement | Where |
 | --- | --- |
 | Source format `3.0 (quilt)` | `debian/source/format` |
+| Local tool directory excluded from the source diff | `debian/source/options` |
 | `Standards-Version: 4.7.4.1` | `debian/control` |
 | No `Priority` field (Policy 4.7.3: omit when it is the default) | `debian/control` |
 | Build with `dh` + `pybuild`/pyproject | `debian/rules` |
