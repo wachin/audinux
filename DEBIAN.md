@@ -32,23 +32,19 @@ so the package is exercised by the autopkgtest instead.
 ## 1. Cut an upstream release first
 
 `debian/watch` and `dpkg-source` expect `audinux_<version>.orig.tar.gz` to be the
-real upstream release. The version in `debian/changelog` is `0.6.1`, but the
-icons/desktop/license fixes were added after 0.6.1, so tag a new release rather
-than reusing 0.6.1 (Policy 3.2.2: a version number must not be reused for
-different source contents):
+real upstream release. Upstream `0.6.2` is tagged as `v0.6.2` and
+`debian/changelog` is at `0.6.2-1`; for later releases, tag the new version,
+push the tag and add a changelog entry, then let `uscan` fetch the tarball:
 
 ```bash
-git tag -a v0.6.2 -m "audinux 0.6.2"
-git push origin v0.6.2            # also push the tag with: git push --tags
-dch -v 0.6.2-1 "New upstream release."
+git tag -a v0.6.3 -m "audinux 0.6.3"
+git push origin v0.6.3
+dch -v 0.6.3-1 "New upstream release."
+uscan --download-current-version     # writes ../audinux_0.6.3.orig.tar.gz
 ```
 
 `debian/watch` matches the `vX.Y.Z` tags of
-<https://github.com/wachin/audinux/tags>, so afterwards:
-
-```bash
-uscan --download-current-version     # writes ../audinux_0.6.2.orig.tar.gz
-```
+<https://github.com/wachin/audinux/tags>.
 
 The watch file uses `version=4`, the format supported by every `devscripts`
 release (the newer rfc822-style `Version: 5` format of `debian-watch(5)` only

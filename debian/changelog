@@ -1,5 +1,7 @@
-audinux (0.6.1-1) unstable; urgency=medium
+audinux (0.6.2-1) unstable; urgency=medium
 
-  * Initial Debian packaging.
+  * Initial Debian release.
+  * Ship the application icon in the hicolor theme and a validated desktop
+    entry, so the player shows up in the menu and in file managers.
 
- -- Washington Indacochea Delgado <linuxfrontier@proton.me>  Fri, 13 Nov 2026 11:40:00 -0500
+ -- Washington Indacochea Delgado <linuxfrontier@proton.me>  Fri, 13 Nov 2026 12:20:00 -0500
