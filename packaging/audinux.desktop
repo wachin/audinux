@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Audinux
+Comment=Long-audio player with multi-line waveform and markers
+Exec=audinux %f
+Icon=audinux
+Terminal=false
+Categories=AudioVideo;Audio;Player;
+MimeType=audio/mpeg;audio/x-wav;audio/flac;audio/ogg;audio/mp4;
+StartupNotify=true

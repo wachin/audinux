@@ -1,22 +1,12 @@
 # Changelog
 
-All notable changes to **Audinux** will be documented in this file.
+## 0.6.1 - 2026-02-12
+- Progressive waveform loading for multi-hour audio (waveform fills in gradually while playback starts immediately)
+- Audipo-like “fit” waveform overview for faster initial rendering on long tracks
+- Resizable UI panels (splitters) for waveform vs playlist/markers
+- Windows 10 support notes and workflow (PyQt6 + VLC/libVLC)
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),  
-and this project adheres to [Semantic Versioning](https://semver.org/).
-
----
-
-## [Unreleased]
-
-### Added
-- **Waveform caching**: The audio waveform is now precomputed once and cached in memory, greatly improving performance for very long audio files (several hours).
-- **Click-to-seek support**: Users can click anywhere on the waveform to jump playback to that position, similar to WhatsApp voice notes.
-
-### Changed
-- Updated waveform drawing logic to use cached data instead of decoding audio segments on the fly.
-- Reduced CPU usage and improved UI responsiveness when scrolling or zooming.
-
-### Fixed
-- Player no longer depends on having the standalone VLC application open.
-
+## 0.6.0 - 2026-01-21
+- Multi-line waveform (Audipo-style) + auto-follow playhead
+- Highlight current row (Audipo pro-like)
+- English UI + Qt i18n scaffolding

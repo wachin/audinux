@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "audinux"
+version = "0.6.1"
+description = "Audinux - long-audio player for Linux with multi-line waveform, markers and A↔B loop"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Washington Indacochea Delgado"}]
+dependencies = [
+  "PyQt6>=6.4",
+  "python-vlc>=3.0",
+  "numpy>=1.23",
+  "pydub>=0.25",
+]
+
+[project.scripts]
+audinux = "audinux.__main__:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["audinux*"]
+
+[tool.setuptools.data-files]
+"share/applications" = ["packaging/audinux.desktop"]
+"share/icons/hicolor/scalable/apps" = ["packaging/audinux.svg"]
+"share/audinux/i18n" = ["packaging/i18n/README.txt"]

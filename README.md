@@ -1,98 +1,155 @@
-# Audinux – Audipo-Like Audio Player (PyQt6, VLC, Pydub)
+# Audinux
 
-Audinux is a lightweight audio player for Linux (tested on Debian 12, including 32-bit)  
-inspired by the **Audipo** app on Android.  
-It is optimized for **very long recordings** (lectures, podcasts, audiobooks of 6+ hours).
+Audinux is a **long-audio player** inspired by **Audipo (Android)**.
 
----
-
-## Installation (Debian 12 / Ubuntu 20.04+)
-
-Make sure you have Python 3.9+ installed. Then install dependencies:
-
-```bash
-sudo apt update
-sudo apt install ffmpeg python3-pip python3-pyqt6 python3-vlc libvlc-dev \
-        python3-numpy python3-pydub python3-scipy vlc vlc-plugin-base
-````
-
-Clone this repository and install:
-
-```bash
-git clone https://github.com/yourusername/audinux.git
-cd audinux
-pip3 install -r requirements.txt   # optional if you maintain a requirements file
-```
-
----
-
-## Run
-
-```bash
-python3 main.py
-```
-
-![](src/Images/01-Audinux.png)
-
----
+It is built for **minutes to multi-hour files** (1–6+ hours): Bible audiobooks, sermons, lectures, podcasts.
 
 ## Features
 
-* **Variable playback speed**: from 0.25x up to 4.0x, with **time-stretch** preserving pitch (libVLC `:audio-time-stretch`).
-* **Multi-line waveform** with vertical scrolling and zoom controls.
-* **Markers**: add named bookmarks, jump to them, or create a **loop A↔B** between two markers.
-* **Playlists**: build and navigate through multiple audio files.
-* **Persistent settings**: playback rate, zoom level, and last used folder are stored via `QSettings`.
-* **Keyboard shortcuts** for fast navigation (see below).
+- **Audipo-style multi-line waveform**: the entire audio fits on screen as stacked rows (no vertical scrolling in the default “fit” view)
+- **Progressive waveform loading** for very long files: playback starts immediately; the waveform appears and fills in gradually
+- **Fast waveform for long files** (coarse overview like Audipo) with on-disk cache (second open is faster)
+- **Markers** with names (saved per audio file)
+- **VLC playback** (plays the original audio file, no quality loss)
+- **Internationalization-ready (Qt .ts workflow)**: UI strings are prepared for translation
+
+## Requirements (Debian / Ubuntu)
+
+Recommended system packages:
+
+```bash
+sudo apt update
+sudo apt install -y python3-pyqt6 python3-pyqt6.qtsvg vlc ffmpeg
+```
+
+### Optional (recommended): audiowaveform
+
+To generate waveforms much faster for very long MP3 files, install **audiowaveform**.
+
+Audinux will automatically use `audiowaveform` when found in `PATH`, and fall back to `ffmpeg` otherwise.
+
+## Run (Linux)
+
+From the project folder:
+
+```bash
+python3 -m audinux
+```
+
+## Development install (Linux editable)
+
+Create a venv that can see system packages (PyQt6, VLC bindings installed via apt):
+
+```bash
+python3 -m venv .venv --system-site-packages
+source .venv/bin/activate
+```
+
+Install Audinux in editable mode **without pulling PyQt6 from PyPI**:
+
+```bash
+pip install -e . --no-deps
+```
+
+Install the remaining pure-Python dependencies:
+
+```bash
+pip install numpy pydub python-vlc
+```
 
 ---
 
-## Keyboard Shortcuts
+## Windows 10
 
-* **Space**: Play / Pause
-* **S**: Stop
-* **← / →**: Seek ±5 s (Ctrl: ±30 s, Shift: ±1 s)
-* **+ / -** or **Z / X**: Zoom in/out
-* **M**: Add marker
-* **, / .**: Jump to previous / next marker
-* **L**: Toggle loop A↔B (select two markers first)
-* **Ctrl+O**: Open file
-* **Ctrl+P**: Add file to playlist
-* **Ctrl+↑ / ↓**: Increase / Decrease playback speed
+Audinux works on Windows 10. Playback uses **VLC** (libVLC), so VLC must be installed.
+
+### 1) Install prerequisites
+
+1. **Install Python 3.11+ (64-bit recommended)**  
+   During installation, check **“Add Python to PATH”**.
+
+2. **Install VLC (VideoLAN)**  
+   Install the normal VLC Windows build. Audinux relies on VLC’s `libvlc.dll` and plugins.
+
+3. (Optional) Install **FFmpeg** if you want the waveform fallback to work when `audiowaveform` is not present.  
+   - Easiest: install FFmpeg and ensure `ffmpeg.exe` is on `PATH`.
+
+### 2) Quick run (no venv)
+
+In PowerShell, inside the project folder:
+
+```powershell
+pip install PyQt6 numpy pydub python-vlc
+python -m audinux
+```
+
+### 3) Developer run (with venv) — recommended for development
+
+```powershell
+python -m venv .venv
+.\.venv\Scriptsctivate
+pip install -U pip
+pip install PyQt6 numpy pydub python-vlc
+python -m audinux
+```
+
+### VLC message in PowerShell
+
+You may see something like:
+
+```
+main input error: ES_OUT_SET_(GROUP_)PCR is called too late (pts_delay increased to 1000 ms)
+```
+
+This is a **VLC timing warning** (PCR/PTS sync). It’s usually harmless if audio plays normally.  
+It can happen on slower machines, with certain MP3 encodings, or when the system is under load.  
+If you do notice stutter, try closing heavy apps, or use a different MP3 encoder/bitrate.
 
 ---
 
-## Notes
+## Packaging (PyInstaller on Windows)
 
-* Supported formats: **MP3, WAV, FLAC, OGG**
-  (waveform extraction via Pydub/FFmpeg, playback via libVLC).
-* Independent pitch shifting is **not implemented yet** (planned).
-* The project is designed for **very long audio files** (lectures, audiobooks, podcasts).
-* No need to launch VLC separately — Audinux uses libVLC directly.
+You can package Audinux into a folder containing an `.exe`.
 
----
+### Build
 
-## For Developers
+From PowerShell in the project folder:
 
-Audinux is written in **Python 3 + PyQt6** with modular code:
+```powershell
+python -m pip install -U pip
+pip install pyinstaller
+pyinstaller --noconfirm --windowed --name Audinux -p . audinux\__main__.py
+```
 
-* `AudioProcessor` → playback engine (libVLC).
-* `WaveformWidget` → waveform visualization and interaction.
-* `MarkersManager` → bookmark and loop support.
-* `Playlist` → simple playlist handling.
-* `AppSettings` → persistent settings via `QSettings`.
+Result:
 
-### Contributions welcome!
+- `dist\Audinux\Audinux.exe`
 
-If you want to help:
+### VLC requirement
 
-* Implement **independent pitch shifting**.
-* Improve **waveform rendering performance** (GPU, OpenGL, etc).
-* Add **export/import of markers**.
-* Package as a **.deb** or **Flatpak** for easier distribution.
+For simplest distribution, **require users to install VLC** (and mention it in your installer/README).  
+If you want a fully portable build, you must bundle VLC’s `libvlc.dll` and `plugins\` folder next to the `.exe`.
 
-Pull requests are encouraged!
+### Bundling extra tools (optional)
+
+If you want the waveform fallback to work everywhere, ship `ffmpeg.exe` alongside the `.exe` and make Audinux look for it
+next to the executable first (then `PATH`).
 
 ---
 
-God Bless You
+## Notes about performance
+
+- For long files (hours), Audinux intentionally generates a **coarse waveform overview** (like Audipo) so it appears quickly.
+- The waveform is cached in the user cache directory. The **second open** of the same file should be much faster.
+
+## Packaging layout (Linux)
+
+This project is structured to install cleanly on Linux, similar to OpenLP:
+
+- Python package: `audinux/`
+- Desktop file & icon: `packaging/`
+- Translations: `i18n/`
+
+## License
+
+See `LICENSE`.
